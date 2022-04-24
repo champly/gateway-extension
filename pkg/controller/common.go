@@ -57,7 +57,12 @@ func validationSvc(svc *corev1.Service) bool {
 	// check domain as name
 	errs := validation.IsDNS1123Label(getIngressName(svc))
 	if len(errs) > 0 {
-		klog.Errorf("Validation %s/%s failed: labels.%s=%s as ingress name invalid:%v", svc.Namespace, svc.Name, svcDomainAnnotationKey, svc.Annotations[svcDomainAnnotationKey], errs)
+		klog.Errorf("Validation %s/%s failed: labels.%s=%s as ingress name invalid:%v",
+			svc.Namespace,
+			svc.Name,
+			svcDomainAnnotationKey,
+			svc.Annotations[svcDomainAnnotationKey],
+			errs)
 		return false
 	}
 
